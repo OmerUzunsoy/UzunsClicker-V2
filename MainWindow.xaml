@@ -1,0 +1,447 @@
+﻿<Window x:Class="UzunsClicker_V2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="UzunsClicker-V2" Height="750" Width="800"
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        x:Name="MainWindowControl"
+        Icon="Resources/Icons/app_icon.ico"
+        Background="{DynamicResource BackgroundBrush}" 
+        FontFamily="Segoe UI Variable Display">
+
+    <Window.Resources>
+        <!-- Dark Theme -->
+        <SolidColorBrush x:Key="DarkBackground" Color="#FF0D1117"/>
+        <SolidColorBrush x:Key="DarkSurface" Color="#FF161B22"/>
+        <SolidColorBrush x:Key="DarkCard" Color="#FF21262D"/>
+        <SolidColorBrush x:Key="DarkAccent" Color="#FF238636"/>
+        <SolidColorBrush x:Key="DarkAccentHover" Color="#FF2EA043"/>
+        <SolidColorBrush x:Key="DarkDanger" Color="#FFD73A49"/>
+        <SolidColorBrush x:Key="DarkDangerHover" Color="#FFE85D75"/>
+        <SolidColorBrush x:Key="DarkText" Color="#FFF0F6FC"/>
+        <SolidColorBrush x:Key="DarkSubText" Color="#FF8B949E"/>
+        <SolidColorBrush x:Key="DarkBorder" Color="#FF30363D"/>
+
+        <!-- Light Theme -->
+        <SolidColorBrush x:Key="LightBackground" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="LightSurface" Color="#FFF6F8FA"/>
+        <SolidColorBrush x:Key="LightCard" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="LightAccent" Color="#FF0969DA"/>
+        <SolidColorBrush x:Key="LightAccentHover" Color="#FF0550AE"/>
+        <SolidColorBrush x:Key="LightDanger" Color="#FFD1242F"/>
+        <SolidColorBrush x:Key="LightDangerHover" Color="#FFE85D75"/>
+        <SolidColorBrush x:Key="LightText" Color="#FF24292F"/>
+        <SolidColorBrush x:Key="LightSubText" Color="#FF656D76"/>
+        <SolidColorBrush x:Key="LightBorder" Color="#FFD0D7DE"/>
+
+        <!-- Dynamic Resources (Dark by default) -->
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#FF0D1117"/>
+        <SolidColorBrush x:Key="SurfaceBrush" Color="#FF161B22"/>
+        <SolidColorBrush x:Key="CardBrush" Color="#FF21262D"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#FF238636"/>
+        <SolidColorBrush x:Key="AccentHoverBrush" Color="#FF2EA043"/>
+        <SolidColorBrush x:Key="DangerBrush" Color="#FFD73A49"/>
+        <SolidColorBrush x:Key="DangerHoverBrush" Color="#FFE85D75"/>
+        <SolidColorBrush x:Key="TextBrush" Color="#FFF0F6FC"/>
+        <SolidColorBrush x:Key="SubTextBrush" Color="#FF8B949E"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#FF30363D"/>
+
+        <!-- Logo Resource -->
+        <BitmapImage x:Key="AppLogo" UriSource="Resources/Icons/app_icon_32.png"/>
+
+        <!-- Modern Button Style -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BorderElement" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="{DynamicResource AccentHoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="BorderElement" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Main Action Button - BAŞLAT yeşil, DURDUR kırmızı hover -->
+        <!-- Main Action Button Style'ını düzelt -->
+        <!-- Main Action Button - Hover renk değişimi YOK, sadece basınca efekt -->
+        <Style x:Key="MainActionButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BorderElement" 
+                        Background="{TemplateBinding Background}" 
+                        CornerRadius="8" 
+                        Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- SADECE basınca efekt - renk değişimi YOK -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="BorderElement" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.96" ScaleY="0.96"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <!-- Basınca hafif parlaklık efekti -->
+                                <Setter TargetName="BorderElement" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10" Opacity="0.3"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Speed Preset Button -->
+        <Style x:Key="SpeedButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+            <Setter Property="Background" Value="{DynamicResource CardBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="Width" Value="92"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Padding" Value="4,6"/>
+        </Style>
+
+        <!-- Modern Card Style -->
+        <Style x:Key="ModernCard" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource CardBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <!-- Stats Card Style -->
+        <Style x:Key="StatsCard" TargetType="Border" BasedOn="{StaticResource ModernCard}">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+
+        <!-- Radio Button Style -->
+        <Style x:Key="ModernRadioButton" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="BorderElement"
+                                Background="Transparent"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse x:Name="RadioMark" 
+                                        Width="16" Height="16" 
+                                        Fill="Transparent" 
+                                        Stroke="{DynamicResource AccentBrush}" 
+                                        StrokeThickness="2"
+                                        Margin="0,0,10,0"/>
+                                <TextBlock Text="{TemplateBinding Content}" 
+                                          VerticalAlignment="Center"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          FontWeight="{TemplateBinding FontWeight}"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="RadioMark" Property="Fill" Value="{DynamicResource AccentBrush}"/>
+                                <Setter TargetName="BorderElement" Property="Background" Value="#1A238636"/>
+                                <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#0A238636"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header - Dil Butonu Düzeltildi -->
+        <Border Grid.Row="0" Background="{DynamicResource SurfaceBrush}" 
+                BorderThickness="0,0,0,1" BorderBrush="{DynamicResource BorderBrush}">
+            <Grid Height="70">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Logo + Başlık -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="{StaticResource AppLogo}" 
+                           Width="40" Height="40" 
+                           Margin="0,0,15,0"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <TextBlock x:Name="lblTitle" Text="UzunsClicker-V2" 
+                               FontSize="26" FontWeight="Bold" 
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource AccentBrush}"/>
+                </StackPanel>
+
+                <!-- Dil Butonu - Sadece TR yazacak -->
+                <Button Grid.Column="2" x:Name="btnLanguageToggle" 
+                        Content="TR" FontSize="16" Width="45" Height="45" 
+                        Background="Transparent" BorderThickness="0"
+                        Foreground="{DynamicResource TextBrush}" Margin="12"
+                        Click="btnLanguageToggle_Click" Cursor="Hand"
+                        ToolTip="Dil Değiştir"/>
+
+                <Button Grid.Column="3" x:Name="btnThemeToggle" 
+                        Content="🌙" FontSize="20" Width="45" Height="45" 
+                        Background="Transparent" BorderThickness="0"
+                        Foreground="{DynamicResource TextBrush}" Margin="12"
+                        Click="btnThemeToggle_Click" Cursor="Hand"
+                        ToolTip="Tema Değiştir"/>
+            </Grid>
+        </Border>
+
+        <!-- Ana İçerik -->
+        <Grid Grid.Row="1" Margin="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Ana Kontrol -->
+            <Border Grid.Row="0" Style="{StaticResource StatsCard}" Margin="10,10,10,20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Sol: İstatistikler -->
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock x:Name="lblStatsTitle" Text="📊 İstatistikler" FontWeight="Bold" FontSize="14" 
+                                   Foreground="{DynamicResource SubTextBrush}" Margin="0,0,0,10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock x:Name="lblTotalText" Text="💥 Toplam:" FontSize="13" 
+                                       Foreground="{DynamicResource SubTextBrush}" Width="60"/>
+                            <TextBlock x:Name="lblTotalClicks" Text="0" FontSize="13" FontWeight="Bold"
+                                       Foreground="{DynamicResource AccentBrush}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock x:Name="lblTargetText" Text="🎯 Hedef:" FontSize="13" 
+                                       Foreground="{DynamicResource SubTextBrush}" Width="60"/>
+                            <TextBlock x:Name="lblTargetDisplay" Text="∞" FontSize="13" FontWeight="Bold"
+                                       Foreground="{DynamicResource TextBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Orta: Ana Buton - Background Başlangıçta Yeşil -->
+                    <Button Grid.Column="1" x:Name="btnMainAction" 
+                            Content="▶️ BAŞLAT" 
+                            Style="{StaticResource MainActionButton}"
+                            Background="{DynamicResource AccentBrush}"
+                            Click="btnMainAction_Click" Margin="20,0"/>
+
+                    <!-- Sağ: Durum -->
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                        <TextBlock x:Name="lblStatusTitle" Text="⚡ Durum" FontWeight="Bold" FontSize="14" 
+                                   Foreground="{DynamicResource SubTextBrush}" Margin="0,0,0,10"/>
+                        <TextBlock x:Name="lblStatus" Text="🔴 Pasif" FontSize="14" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="lblProgress" Text="" FontSize="12" 
+                                   Foreground="{DynamicResource SubTextBrush}" HorizontalAlignment="Center" Margin="0,5"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Ayarlar Grid -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Click Hızı -->
+                <Border Grid.Column="0" Style="{StaticResource ModernCard}">
+                    <StackPanel>
+                        <TextBlock x:Name="lblSpeedTitle" Text="⚡ Click Hızı (CPS)" FontWeight="Bold" FontSize="15" 
+                                   Foreground="{DynamicResource TextBrush}" Margin="0,0,0,15"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                            <TextBlock x:Name="lblSpeedEmoji" Text="🐢" FontSize="26" 
+                                       VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <TextBox x:Name="txtClickSpeed" Width="80" Height="35" 
+                                     Text="1" FontSize="16" TextAlignment="Center" FontWeight="SemiBold"
+                                     Background="{DynamicResource SurfaceBrush}" 
+                                     Foreground="{DynamicResource TextBrush}"
+                                     BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                     TextChanged="txtClickSpeed_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock Text="(1-10000)" HorizontalAlignment="Center"
+                                   Foreground="{DynamicResource SubTextBrush}" FontSize="11" Margin="0,8"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <Button x:Name="btnSlowSpeed" Content="🐌 25" Style="{StaticResource SpeedButton}"
+                                    Click="btnSlowSpeed_Click" Width="60"/>
+                            <Button x:Name="btnMediumSpeed" Content="🏃 500" Style="{StaticResource SpeedButton}"
+                                    Click="btnMediumSpeed_Click" Width="61"/>
+                            <Button x:Name="btnFastSpeed" Content="⚡ 2.5K" Style="{StaticResource SpeedButton}"
+                                    Click="btnFastSpeed_Click" Width="59"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Click Türü -->
+                <Border Grid.Column="1" Style="{StaticResource ModernCard}">
+                    <StackPanel>
+                        <TextBlock x:Name="lblClickTypeTitle" Text="🖱️ Click Türü" FontWeight="Bold" FontSize="15" 
+                                   Foreground="{DynamicResource TextBrush}" Margin="0,0,0,15"/>
+                        <StackPanel HorizontalAlignment="Center" Margin="0,10">
+                            <RadioButton x:Name="rbLeftClick" Content="👆 Sol Click" 
+                                         IsChecked="True" Style="{StaticResource ModernRadioButton}"/>
+                            <RadioButton x:Name="rbRightClick" Content="👉 Sağ Click" 
+                                         Style="{StaticResource ModernRadioButton}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Tıklama Hedefi -->
+                <Border Grid.Column="2" Style="{StaticResource ModernCard}">
+                    <StackPanel>
+                        <TextBlock x:Name="lblTargetTitle" Text="🎯 Tıklama Hedefi" FontWeight="Bold" FontSize="15" 
+                                   Foreground="{DynamicResource TextBrush}" Margin="0,0,0,15"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                            <TextBox x:Name="txtClickTarget" Width="80" Height="35" 
+                                     Text="0" FontSize="16" TextAlignment="Center" FontWeight="SemiBold"
+                                     Background="{DynamicResource SurfaceBrush}" 
+                                     Foreground="{DynamicResource TextBrush}"
+                                     BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                     TextChanged="txtClickTarget_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock x:Name="lblTargetHelper" Text="(0 = Sınırsız)" HorizontalAlignment="Center"
+                                   Foreground="{DynamicResource SubTextBrush}" FontSize="11" Margin="0,8"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <Button Content="100" Style="{StaticResource SpeedButton}" Width="65"
+                                    Click="btnTarget100_Click"/>
+                            <Button Content="1K" Style="{StaticResource SpeedButton}" Width="65"
+                                    Click="btnTarget1000_Click"/>
+                            <Button Content="∞" Style="{StaticResource SpeedButton}" Width="65"
+                                    Click="btnTargetUnlimited_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Alt Ayarlar -->
+            <Grid Grid.Row="2" Margin="0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Kısayol Tuşu -->
+                <Border Grid.Column="0" Style="{StaticResource ModernCard}">
+                    <StackPanel>
+                        <TextBlock x:Name="lblHotkeyTitle" Text="⌨️ Kısayol Tuşu" FontWeight="Bold" FontSize="14" 
+                                   Foreground="{DynamicResource TextBrush}" Margin="0,0,0,10"/>
+                        <Button x:Name="btnHotkeySelector" 
+                                Content="🎯 F1" FontSize="13" Height="38" Width="140"
+                                Style="{StaticResource ModernButton}"
+                                Click="btnHotkeySelector_Click"/>
+                        <TextBlock x:Name="lblHotkeyHelper" 
+                                   Text="Tuş atamak için tıklayın" 
+                                   HorizontalAlignment="Center"
+                                   Foreground="{DynamicResource SubTextBrush}" 
+                                   FontSize="10" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Çalışma Modu -->
+                <Border Grid.Column="1" Style="{StaticResource ModernCard}">
+                    <StackPanel>
+                        <TextBlock x:Name="lblWorkModeTitle" Text="🔄 Çalışma Modu" FontWeight="Bold" FontSize="14" 
+                                   Foreground="{DynamicResource TextBrush}" Margin="0,0,0,10"/>
+                        <StackPanel HorizontalAlignment="Center">
+                            <RadioButton x:Name="rbToggleMode" Content="🔘 Aç/Kapa" 
+                                         IsChecked="True" Style="{StaticResource ModernRadioButton}" Margin="0,2"/>
+                            <RadioButton x:Name="rbHoldMode" Content="⏸️ Basılı Tut" 
+                                         Style="{StaticResource ModernRadioButton}" Margin="0,2"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Reset Butonu -->
+                <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,0">
+                    <Button x:Name="btnReset" Content="🔄 Reset" Width="100" Height="80"
+                            Background="#FF6F42C1" Style="{StaticResource ModernButton}" 
+                            FontSize="14" Click="btnReset_Click"/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
+        <!-- Footer -->
+        <Border Grid.Row="2" Background="{DynamicResource SurfaceBrush}" 
+                BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
+            <TextBlock x:Name="lblDeveloper" Text="👨‍💻 Ömer Uzunsoy tarafından geliştirildi" 
+                       HorizontalAlignment="Center" 
+                       Foreground="{DynamicResource SubTextBrush}" 
+                       FontSize="12" Margin="20,10"/>
+        </Border>
+    </Grid>
+</Window>
