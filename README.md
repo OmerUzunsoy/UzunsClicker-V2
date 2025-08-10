@@ -75,35 +75,35 @@
 3. İndir ve çalıştır
 4. İstersen masaüstüne kısayol oluştur
 
-### **🔧 Yöntem 2: Kaynak Koddan Derleme**
+### 🔧 Yöntem 2: Kaynak Koddan Derleme
 
-     # Repository'yi klonla
-     git clone https://github.com/OmerUzunsoy/UzunsClicker-V2.git
-    cd UzunsClicker-V2
+# Repository'yi klonla
+git clone https://github.com/OmerUzunsoy/UzunsClicker-V2.git
+cd UzunsClicker-V2
 
-    # Visual Studio ile aç ve derle
-    # Build > Build Solution (Ctrl+Shift+B)
+# Visual Studio ile aç ve derle
+# Build > Build Solution (Ctrl+Shift+B)
 
 🚀 Kullanım Rehberi
 
-⚡ Temel Kullanım:
+⚡ Temel Kullanım
 
 Click hızını ayarla (1-10000 CPS)
 Click türünü seç (👆 Sol / 👉 Sağ)
 Hedef belirle (0 = sınırsız)
 ▶️ BAŞLAT butonuna tıkla veya kısayol tuşuna bas
-⌨️ Kısayol Tuşu Ayarlama:
+⌨️ Kısayol Tuşu Ayarlama
 
 🎯 Kısayol Tuşu bölümündeki butona tıkla
 "Tuşa basın..." mesajını bekle
 İstediğin klavye veya mouse tuşuna bas
 Kombinasyon örneği: Ctrl tuşuna bas → sonra F5'e bas
 Artık o tuş kombinasyonuyla başlat/durdur yapabilirsin
-🎨 Tema/Dil Değiştirme:
+🎨 Tema/Dil Değiştirme
 
 🌙/☀️ butonu ile Dark/Light tema değiştir
 TR/EN butonu ile Türkçe/İngilizce dil değiştir
-🔄 Çalışma Modları:
+🔄 Çalışma Modları
 
 🔘 Aç/Kapa: Tuşa bir kez bas = başlat, tekrar bas = durdur
 ⏸️ Basılı Tut: Tuşu basılı tuttuğun sürece çalışır
@@ -143,7 +143,7 @@ Feature branch oluştur (git checkout -b feature/HarikalOzellik)
 Değişikliklerini commit et (git commit -m 'Harika özellik eklendi')
 Branch'ini push et (git push origin feature/HarikalOzellik)
 Pull Request aç
-🎯 Katkı Alanları:
+🎯 Katkı Alanları
 
 🐛 Bug fix'leri
 ✨ Yeni özellikler
@@ -163,7 +163,7 @@ Pull Request aç
 ✅ Renkli durum göstergeleri
 ✅ Gelişmiş hata yönetimi
 ✅ Performans optimizasyonları
-📅 Gelecek Sürümler:
+📅 Gelecek Sürümler
 
 🔜 Makro kaydı ve oynatma
 🔜 Profil sistemi
@@ -174,7 +174,7 @@ Pull Request aç
 
 Bu proje MIT Lisansı altında lisanslanmıştır. Detaylar için LICENSE dosyasına bakın.
 
-MIT Lisansı Özeti:
+MIT Lisansı Özeti
 
 ✅ Ticari kullanım
 ✅ Değiştirme
@@ -199,3 +199,5 @@ Projeyi beğendiysen ⭐ yıldız vermeyi unutma!
 ![GitHub stars](https://img.shields.io/github/stars/OmerUzunsoy/UzunsClicker-V2?style=social) ![GitHub forks](https://img.shields.io/github/forks/OmerUzunsoy/UzunsClicker-V2?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/OmerUzunsoy/UzunsClicker-V2?style=social)
 
 Teşekkürler! 🙏
+
+<img src="https://komarev.com/ghpvc/?username=UzunsClicker-V2&label=Görüntülenme&color=0e75b6&style=flat" alt="Profile views" /> </div> ```
